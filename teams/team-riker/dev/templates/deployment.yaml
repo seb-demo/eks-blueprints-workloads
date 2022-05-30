@@ -27,5 +27,5 @@ spec:
             cpu: '50m'
         securityContext:
           privileged: false
-          readOnlyRootFilesystem: true
+          readOnlyRootFilesystem: false # guestbook neet to write to /var/run/apache2/apache2.pid
           allowPrivilegeEscalation: false
