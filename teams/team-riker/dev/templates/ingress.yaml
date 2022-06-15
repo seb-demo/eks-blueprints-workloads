@@ -15,7 +15,7 @@ metadata:
 {{ end }}
 spec:
   rules:
-{{ if .Values.spec.ingress.host }}
+{{ if not eq .Values.spec.ingress.host "dev.example.com" }}
   - host: guestbook-ui.{{ .Values.spec.ingress.host }}
 {{ else }}
   - host:  
