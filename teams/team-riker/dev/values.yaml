@@ -1,4 +1,4 @@
 spec:
   ingress:
     host: 
-    type: nginx
+    type: alb
