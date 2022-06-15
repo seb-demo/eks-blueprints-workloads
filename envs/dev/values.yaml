@@ -5,4 +5,4 @@ spec:
     repoURL: https://github.com/seb-demo/eks-blueprints-workloads
     targetRevision: main
   ingress:
-    host: dev.example.com
+    host: #dev.example.com
