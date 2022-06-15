@@ -27,7 +27,7 @@ spec:
 {{ end }}  
     http:
       paths:
-      - path: /
+      - path: /guestbook
         pathType: Prefix
         backend:
           service:
