@@ -3,14 +3,14 @@ spec:
     server: https://kubernetes.default.svc
   apps:
     ecsdemoFrontend:
-      repoURL: git@github.com:aws-containers/ecsdemo-frontend.git
+      repoURL: https://github.com/aws-containers/ecsdemo-frontend.git
       targetRevision: main
       path: kubernetes/helm/ecsdemo-frontend
     ecsdemoNodejs:
-      repoURL: git@github.com:aws-containers/ecsdemo-nodejs.git
+      repoURL: https://github.com/aws-containers/ecsdemo-nodejs.git
       targetRevision: main
       path: kubernetes/helm/ecsdemo-nodejs
     ecsdemoCrystal:
-      repoURL: git@github.com:aws-containers/ecsdemo-crystal.git
+      repoURL: https://github.com/aws-containers/ecsdemo-crystal.git
       targetRevision: main
       path: kubernetes/helm/ecsdemo-crystal
