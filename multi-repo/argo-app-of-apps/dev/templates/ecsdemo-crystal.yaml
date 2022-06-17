@@ -6,7 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: ecsdemo-crystal
+  project: default
   destination:
     namespace: ecsdemo-crystal
     server: {{ .Values.spec.destination.server }}
