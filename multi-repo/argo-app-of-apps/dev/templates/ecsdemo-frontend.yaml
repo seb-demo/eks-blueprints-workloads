@@ -18,6 +18,7 @@ spec:
       parameters:
       - name: ingress.enabled
         value: true    
+        
   syncPolicy:
     automated:
       prune: true
