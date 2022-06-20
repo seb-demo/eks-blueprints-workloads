@@ -9,7 +9,8 @@ ecsdemoNodejs:
 replicaCount: 1
 
 image:
-  repository: public.ecr.aws/aws-containers/ecsdemo-frontend
+  #repository: public.ecr.aws/aws-containers/ecsdemo-frontend
+  repository: public.ecr.aws/seb-demo/ecsdemo-frontend
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
