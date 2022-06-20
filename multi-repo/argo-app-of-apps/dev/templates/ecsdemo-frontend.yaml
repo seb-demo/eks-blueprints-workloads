@@ -22,7 +22,7 @@ spec:
         value: "alb"
       - name: ingress.hosts[0].host
         value: "toto"
-      - name: ingress.hosts[0].paths
+      - name: ingress.hosts[0].paths.path
         value: "/"        
 
   syncPolicy:
