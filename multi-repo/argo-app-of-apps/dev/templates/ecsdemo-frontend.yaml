@@ -19,7 +19,9 @@ spec:
       - name: ingress.enabled
         value: "true"
       - name: ingress.className
-        value: "alb"     
+        value: "alb"
+      - name: ingress.annotations.'alb.ingress.kubernetes.io/target-type'
+        value: "ip"
 
   syncPolicy:
     automated:
