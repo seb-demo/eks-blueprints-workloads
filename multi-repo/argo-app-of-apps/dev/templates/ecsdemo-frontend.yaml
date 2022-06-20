@@ -21,7 +21,7 @@ spec:
       - name: ingress.className
         value: "alb"
       - name: ingress.hosts[0].host
-        value: ""
+        value: "toto"
 
   syncPolicy:
     automated:
