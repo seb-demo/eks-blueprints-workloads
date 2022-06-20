@@ -6,7 +6,8 @@ spec:
       repoURL: https://github.com/seb-demo/eks-blueprints-workloads
       #repoURL: https://github.com/aws-containers/ecsdemo-frontend.git      
       targetRevision: main
-      path: kubernetes/helm/ecsdemo-frontend
+      #path: kubernetes/helm/ecsdemo-frontend
+      path: teams/ecsdemo-frontend/dev
     ecsdemoNodejs:
       repoURL: https://github.com/aws-containers/ecsdemo-nodejs.git
       targetRevision: main
