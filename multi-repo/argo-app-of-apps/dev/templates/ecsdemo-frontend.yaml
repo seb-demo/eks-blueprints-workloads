@@ -14,7 +14,10 @@ spec:
     repoURL: {{ .Values.spec.apps.ecsdemoFrontend.repoURL }}
     targetRevision: {{ .Values.spec.apps.ecsdemoFrontend.targetRevision }}
     path: {{ .Values.spec.apps.ecsdemoFrontend.path }}
-    
+    helm:
+      parameters:
+      - name: ingress.enabled
+        value: true    
   syncPolicy:
     automated:
       prune: true
