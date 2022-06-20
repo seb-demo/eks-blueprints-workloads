@@ -22,6 +22,8 @@ spec:
         value: "alb"
       # - name: ingress.annotations.'alb.ingress.kubernetes.io/target-type'
       #   value: "ip"
+      - name: replicaCount
+        value: "3"
 
   syncPolicy:
     automated:
