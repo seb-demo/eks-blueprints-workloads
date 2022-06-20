@@ -18,6 +18,8 @@ spec:
       parameters:
       - name: ingress.enabled
         value: "true"
+      - name: ingress.className
+        value: "alb"
       - name: ingress.hosts[0].host
         value: ""
 
