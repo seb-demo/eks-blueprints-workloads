@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ecsdemo-nodejs
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: eksdemo-nodejs
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/aws-containers/ecsdemo-nodejs.git
+    targetRevision: main
+    path: kubernetes/helm/ecsdemo-nodejs
+    helm:
+      parameters:
+      - name: ingress.enabled
+        value: true
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
