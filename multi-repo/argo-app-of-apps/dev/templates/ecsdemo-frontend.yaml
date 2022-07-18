@@ -20,16 +20,18 @@ spec:
         value: "true"
       - name: ingress.className
         value: "alb"
-      - name: ingress.annotations."alb\.ingress\.kubernetes\.io/group\.name"
+      - name: ingress.annotations.alb\.ingress\.kubernetes\.io/group\.name
         value: "ecsdemo"        
-      - name: ingress.annotations."alb\.ingress\.kubernetes\.io/target-type"
+      - name: ingress.annotations.alb\.ingress\.kubernetes\.io/target-type
         value: "ip"
-      - name: ingress.annotations."alb\.ingress\.kubernetes\.io/listen-ports"
-        value: '"[{\"HTTP\": 80}]"' 
-      - name: ingress.annotations."alb\.ingress\.kubernetes\.io/tags"
-        value: 'Environment=dev,Team=ecsdemo'
+      - name: ingress.annotations.alb\.ingress\.kubernetes\.io/listen-ports
+        value: '[{"HTTP": 80}]' 
+      - name: ingress.annotations.alb\.ingress\.kubernetes\.io/tags
+        value: "Environment=dev,Team=ecsdemo"
       - name: ingress.hosts[0].host
         value: ""
+      - name: ingress.hosts[0].paths[0].path
+        value: "/"
       - name: ingress.hosts[0].paths[0].pathType
         value: "Prefix"
       - name: replicaCount
