@@ -25,7 +25,7 @@ spec:
       - name: ingress.annotations."alb\.ingress\.kubernetes\.io/target-type"
         value: "ip"
       - name: ingress.annotations."alb\.ingress\.kubernetes\.io/listen-ports"
-        value: '[{"HTTP": 80}]' 
+        value: '"[{\"HTTP\": 80}]"' 
       - name: ingress.annotations."alb\.ingress\.kubernetes\.io/tags"
         value: 'Environment=dev,Team=ecsdemo'               
       - name: replicaCount
