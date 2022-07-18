@@ -11,6 +11,6 @@ spec:
       targetRevision: main
       path: kubernetes/helm/ecsdemo-nodejs
     ecsdemoCrystal:
-      repoURL: https://github.com/aws-containers/ecsdemo-crystal.git
+      repoURL: git@github.com:aws-containers/ecsdemo-nodejs.git
       targetRevision: main
       path: kubernetes/helm/ecsdemo-crystal
