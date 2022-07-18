@@ -20,10 +20,12 @@ spec:
         value: "true"
       - name: ingress.className
         value: "alb"
-      # - name: ingress.annotations.'alb.ingress.kubernetes.io/target-type'
-      #   value: "ip"
+      - name: ingress.annotations.'alb.ingress.kubernetes.io/target-type'
+        value: "ip"
       - name: replicaCount
         value: "3"
+      - name: image.repository
+        value: "public.ecr.aws/seb-demo/ecsdemo-frontend"
 
   syncPolicy:
     automated:

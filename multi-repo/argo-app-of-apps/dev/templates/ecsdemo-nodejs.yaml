@@ -22,4 +22,4 @@ spec:
     automated:
       prune: true
     syncOptions:
-      - CreateNamespace=true
+      - CreateNamespace=false # https://github.com/argoproj/argo-cd/issues/7799
