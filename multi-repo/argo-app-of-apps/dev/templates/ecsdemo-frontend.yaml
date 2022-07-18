@@ -20,7 +20,7 @@ spec:
         value: "true"
       - name: ingress.className
         value: "alb"
-      - name: ingress.annotations."alb\.ingress\.kubernetes\.io/group.name"
+      - name: ingress.annotations."alb\.ingress\.kubernetes\.io/group\.name"
         value: "ecsdemo"        
       - name: ingress.annotations."alb\.ingress\.kubernetes\.io/target-type"
         value: "ip"
