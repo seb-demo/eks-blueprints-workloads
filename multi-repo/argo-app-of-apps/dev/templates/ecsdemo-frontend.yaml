@@ -21,7 +21,9 @@ spec:
       - name: ingress.className
         value: "alb"
       - name: ingress.annotations.alb\.ingress\.kubernetes\.io/group\.name
-        value: "ecsdemo"        
+        value: "ecsdemo"
+      - name: ingress.annotations.alb\.ingress\.kubernetes\.io/scheme
+        value: "internet-facing"
       - name: ingress.annotations.alb\.ingress\.kubernetes\.io/target-type
         value: "ip"
       - name: ingress.annotations.alb\.ingress\.kubernetes\.io/listen-ports
