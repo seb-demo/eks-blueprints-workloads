@@ -20,7 +20,7 @@ spec:
         value: "true"
       - name: ingress.className
         value: "alb"
-      - name: ingress.annotations.'alb.ingress.kubernetes.io/target-type'
+      - name: ingress.annotations."alb.ingress.kubernetes.io/target-type"
         value: "ip"
       - name: replicaCount
         value: "3"
