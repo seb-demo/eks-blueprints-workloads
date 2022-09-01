@@ -12,7 +12,11 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: #skiapp.{{ .Values.spec.ingress.host }}
+{{ if .Values.spec.ingress.host }}  
+  - host: skiapp.{{ .Values.spec.ingress.host }}
+{{ else }}  
+  - host: 
+{{ end }}  
     http:
       paths:
       - path: /

@@ -1,0 +1,69 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: burnham-ingress
+  namespace: team-burnham
+  labels:
+    app: burnham-ingress-{{ .Values.spec.env }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+{{ if .Values.spec.ingress.host }}  
+  - host: burnham.{{ .Values.spec.ingress.host }}  
+{{ else }}  
+  - host: 
+{{ end }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: eks-example
+            port: 
+              number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eks-example
+  labels:
+    app: burnham-ingress-{{ .Values.spec.env }}  
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: eks-example
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eks-example
+  labels:
+    app: burnham-deployment-{{ .Values.spec.env }}
+spec:
+  replicas: {{int .Values.spec.replicas}}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: eks-example
+  template:
+    metadata:
+      labels:
+        app: eks-example
+        seb: test
+    spec:
+      containers:
+        - name: eks-example
+          image: public.ecr.aws/seb-demo/eks-example:a213b841
+          ports:
+            - containerPort: 80
+      # nodeSelector:
+      #   team: burnham
+      #   type: karpenter
+      # tolerations:
+      #   - key: 'burnham'
+      #     operator: 'Exists'
+      #     effect: 'NoSchedule'
