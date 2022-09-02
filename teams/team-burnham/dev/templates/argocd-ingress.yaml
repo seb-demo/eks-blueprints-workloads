@@ -10,11 +10,14 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80,"HTTPS": 443}]'
-    #alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-3:382076407153:certificate/4f12deae-5b63-4ac2-a958-2acd4a8f2c1b
     alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/group.name: 'eks-blueprint-dev'
     alb.ingress.kubernetes.io/target-type: 'ip'
+{{ if eq .Values.spec.ingress.host "cdk" }}      
     alb.ingress.kubernetes.io/backend-protocol: 'HTTP'
+{{ else }}
+    alb.ingress.kubernetes.io/backend-protocol: 'HTTPS'
+{{ end }} 
     link.argocd.argoproj.io/external-link: 'https://eu-west-3.console.aws.amazon.com/cloudwatch/home?region=eu-west-3#container-insights:performance'
 spec:
   rules:
