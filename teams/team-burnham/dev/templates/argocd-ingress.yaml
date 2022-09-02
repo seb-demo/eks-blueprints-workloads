@@ -7,7 +7,7 @@ metadata:
     app: argocd-{{ .Values.spec.env }}
     team: burnham
   annotations:
-    alb.ingress.kubernetes.io/group.name: Burnham
+    #alb.ingress.kubernetes.io/group.name: Burnham
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: 'ip'
 {{ if .Values.spec.ingress.host }}
