@@ -7,21 +7,26 @@ metadata:
     app: argocd-{{ .Values.spec.env }}
     team: burnham
   annotations:
-    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/group.name: Burnham
     alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: 'ip'
+{{ if .Values.spec.ingress.host }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80,"HTTPS": 443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
-    alb.ingress.kubernetes.io/group.name: 'eks-blueprint-dev'
-    alb.ingress.kubernetes.io/target-type: 'ip'
+{{ else }}
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+{{ end }}
 {{ if eq .Values.spec.ingress.host "cdk" }}      
     alb.ingress.kubernetes.io/backend-protocol: 'HTTP'
 {{ else }}
     alb.ingress.kubernetes.io/backend-protocol: 'HTTPS'
 {{ end }} 
+    alb.ingress.kubernetes.io/tags: Environment=dev,Team=Burnham
     link.argocd.argoproj.io/external-link: 'https://eu-west-3.console.aws.amazon.com/cloudwatch/home?region=eu-west-3#container-insights:performance'
 spec:
+  ingressClassName: alb
   rules:
-{{ if .Values.spec.ingress.host }}  
+{{ if .Values.spec.ingress.host }}
     - host: argocd.{{ .Values.spec.ingress.host }}
 {{ else }}  
     - host: 
@@ -32,11 +37,11 @@ spec:
             pathType: Prefix
             backend:
               service:
-{{ if eq .Values.spec.ingress.host "cdk" }}               
+{{ if eq .Values.spec.ingress.host "cdk" }}
                 name: blueprints-addon-argocd-server
 {{ else }}
                 name: argo-cd-argocd-server
-{{ end }}                              
+{{ end }}
                 port:
                   number: 80
 ---

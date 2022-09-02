@@ -4,12 +4,26 @@ metadata:
   name: skiapp-ingress
   namespace: team-riker
   annotations:
-    alb.ingress.kubernetes.io/group.name: riker
+{{ if eq .Values.spec.ingress.type "nginx" }} 
+    #nginx annotations
+{{ else }}
+    alb.ingress.kubernetes.io/group.name: Riker
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+  {{ if .Values.spec.ingress.host }}
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80,"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+  {{ else }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+  {{ end }}
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=Riker
+{{ end }}
 spec:
+{{ if eq .Values.spec.ingress.type "nginx" }}
+  kubernetes.io/ingress.class: "nginx"
+{{ else }}
+  ingressClassName: alb
+{{ end }}
   ingressClassName: alb
   rules:
 {{ if .Values.spec.ingress.host }}  
