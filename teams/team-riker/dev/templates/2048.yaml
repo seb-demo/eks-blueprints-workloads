@@ -84,7 +84,11 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: #2048-ipv6.eks.demo3.allamand.com
+{{ if .Values.spec.ingress.host }}    
+    - host: 2048.{{ .Values.spec.ingress.host }}
+{{ else }}  
+    - host: 
+{{ end }}      
       http:
         paths:
         - path: /

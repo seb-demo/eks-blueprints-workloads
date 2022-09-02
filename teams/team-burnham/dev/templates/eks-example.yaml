@@ -44,7 +44,8 @@ metadata:
   labels:
     app: burnham-deployment-{{ .Values.spec.env }}
 spec:
-  replicas: {{int .Values.spec.replicas}}
+  #replicas: {{ int .Values.spec.replicas }}
+  replicas: 3
   revisionHistoryLimit: 3
   selector:
     matchLabels:
