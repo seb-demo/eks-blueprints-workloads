@@ -12,7 +12,7 @@ metadata:
     #rewrite does not exist yet in ALB
     #https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1571
     #so commenting grouping feature
-    #alb.ingress.kubernetes.io/group.name: Riker
+    #alb.ingress.kubernetes.io/group.name: riker
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
   {{ if .Values.spec.ingress.host }}
