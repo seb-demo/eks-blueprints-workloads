@@ -17,12 +17,8 @@ metadata:
     alb.ingress.kubernetes.io/ssl-redirect: '443'
   {{ else }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-  {{ end }}
-  {{ if eq .Values.spec.ingress.host "cdk" }}      
+  {{ end }}     
     alb.ingress.kubernetes.io/backend-protocol: 'HTTP'
-  {{ else }}
-    alb.ingress.kubernetes.io/backend-protocol: 'HTTPS'
-  {{ end }}
 {{ end }}  
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=Burnham
 spec:
