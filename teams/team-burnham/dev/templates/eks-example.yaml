@@ -6,22 +6,31 @@ metadata:
   labels:
     app: burnham-ingress-{{ .Values.spec.env }}
   annotations:
+{{ if eq .Values.spec.ingress.type "nginx" }} 
+    #nginx annotations  
+{{ else }}      
     alb.ingress.kubernetes.io/group.name: burnham
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: 'ip'
-{{ if .Values.spec.ingress.host }}
+  {{ if .Values.spec.ingress.host }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80,"HTTPS": 443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
-{{ else }}
+  {{ else }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-{{ end }}
-{{ if eq .Values.spec.ingress.host "cdk" }}      
+  {{ end }}
+  {{ if eq .Values.spec.ingress.host "cdk" }}      
     alb.ingress.kubernetes.io/backend-protocol: 'HTTP'
-{{ else }}
+  {{ else }}
     alb.ingress.kubernetes.io/backend-protocol: 'HTTPS'
-{{ end }} 
+  {{ end }}
+{{ end }}  
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=Burnham
 spec:
+{{ if eq .Values.spec.ingress.type "nginx" }}  
+  kubernetes.io/ingress.class: "nginx"
+{{ else }}
+  ingressClassName: alb
+{{ end }}
   rules:
 {{ if .Values.spec.ingress.host }}  
   - host: burnham.{{ .Values.spec.ingress.host }}  
