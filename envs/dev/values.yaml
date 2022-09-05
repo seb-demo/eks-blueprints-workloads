@@ -5,6 +5,7 @@ spec:
     repoURL: https://github.com/seb-demo/eks-blueprints-workloads
     targetRevision: main
   env: dev
+  clusterName:
   blueprint: 'cdk/terraform'
   ingress:
     type: 'nginx/alb'
