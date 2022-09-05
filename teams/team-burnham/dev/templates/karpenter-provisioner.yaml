@@ -57,7 +57,8 @@ spec:
   provider:
     apiVersion: extensions.karpenter.sh/v1alpha1
     kind: AWS
-    instanceProfile: ${iam-instance-profile-id}
+    #instanceProfile: {{ .Values.spec.karpenterInstanceProfile }}
+    instanceProfile: {{ .Values.spec.clusterName }}-managed-ondemand
     securityGroupSelector:
       #kubernetes.io/cluster/demo: '*'
       kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'      
