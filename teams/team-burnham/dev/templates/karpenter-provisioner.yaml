@@ -61,8 +61,9 @@ spec:
     instanceProfile: {{ .Values.spec.clusterName }}-managed-ondemand
     securityGroupSelector:
       #kubernetes.io/cluster/demo: '*'
-      kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'      
+      #kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'      
       #aws:eks:cluster-name: '${eks-cluster-id}' # Choose only security groups of nodes
+      aws:eks:cluster-name: '{{ .Values.spec.clusterName }}' # Choose only security groups of nodes      
     subnetSelector:
       kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'    
       #kubernetes.io/cluster/${eks-cluster-id}: '*'
