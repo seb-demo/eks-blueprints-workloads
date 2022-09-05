@@ -4,27 +4,32 @@ metadata:
   name: team-burnham
   namespace: argocd
   labels:
-    env: {{.Values.spec.env}}  
+    env: {{.Values.spec.env}}
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
     namespace: team-burnham
-    server: {{ .Values.spec.destination.server }}
+    server: {{.Values.spec.destination.server}}
   source:
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    repoURL: {{.Values.spec.source.repoURL}}
+    targetRevision: {{.Values.spec.source.targetRevision}}
     path: teams/team-burnham/dev
     helm:
       parameters:
-      - name: spec.ingress.host
-        value: {{ .Values.spec.ingress.host }}
-      - name: spec.env
-        value: {{ .Values.spec.env }}           
+        - name: spec.ingress.host
+          value: {{.Values.spec.ingress.host}}
+        - name: spec.ingress.type
+          value: {{.Values.spec.ingress.type}}
+        - name: spec.env
+          value: {{.Values.spec.env}}
+        - name: spec.blueprint
+          value: {{.Values.spec.blueprint}}
+        - name: spec.clusterName
+          value: {{.Values.spec.clusterName}}
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
-    
+      - CreateNamespace=true
