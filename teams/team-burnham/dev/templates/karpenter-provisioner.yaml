@@ -34,16 +34,15 @@ spec:
     billing-team: burnham
     team: burnham
     type: karpenter
-   taints:
-     - key: burnham
-       value: 'true'
-       effect: NoSchedule
+  taints:
+  - key: burnham
+    value: 'true'
+    effect: NoSchedule
 ---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
 metadata:
   name: default
-
 spec:
   requirements:
     # - key: 'node.kubernetes.io/instance-type'
