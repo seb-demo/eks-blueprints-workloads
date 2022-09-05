@@ -18,13 +18,13 @@ spec:
     kind: AWS
     instanceProfile: {{ .Values.spec.karpenterInstanceProfile }}
     securityGroupSelector:
-      kubernetes.io/cluster/blueprints-dev-blueprint: '*'
-      #aws:eks:cluster-name: 'blueprints-dev-blueprint'
+      kubernetes.io/cluster/{{ .Values.clusterName }}: '*'
+      #aws:eks:cluster-name: '{{ .Values.clusterName }}'
     subnetSelector:
-      kubernetes.io/cluster/blueprints-dev-blueprint: '*'
-      #aws:cloudformation:stack-name: 'blueprints-dev-blueprints-dev-blueprint'
+      kubernetes.io/cluster/{{ .Values.clusterName }}: '*'
+      #aws:cloudformation:stack-name: '{{ .Values.clusterName }}'
     tags:
-      karpenter.sh/cluster_name: blueprints-{{ .Values.spec.env }}-blueprint
+      karpenter.sh/cluster_name: {{ .Values.clusterName }}
       karpenter.sh/provisioner: burnham
   ttlSecondsAfterEmpty: 0
   limits:
