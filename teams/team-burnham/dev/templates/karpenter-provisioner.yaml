@@ -34,7 +34,7 @@ spec:
     billing-team: burnham
     team: burnham
     type: karpenter
-  taints:
-    - key: burnham
-      value: 'true'
-      effect: NoSchedule
+  # taints:
+  #   - key: burnham
+  #     value: 'true'
+  #     effect: NoSchedule
