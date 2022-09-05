@@ -1,3 +1,35 @@
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: karpenter-bottlerocket
+spec:
+  amiFamily: Bottlerocket
+  instanceProfile: {{.Values.spec.karpenterInstanceProfile}}
+  #instanceProfile: {{ .Values.spec.clusterName }}-managed-ondemand
+  subnetSelector:
+    kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'
+    #aws:cloudformation:stack-name: '{{ .Values.spec.clusterName }}'
+    kubernetes.io/role/internal-elb: '1' # to select only private subnets
+  securityGroupSelector:
+    aws:eks:cluster-name: '{{ .Values.spec.clusterName }}' # Choose only security groups of nodes
+    #kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'
+    #aws:eks:cluster-name: '{{ .Values.spec.clusterName }}'
+  userData: |
+    [settings.kubernetes]
+    kube-api-qps = 30
+    [settings.kubernetes.eviction-hard]
+    "memory.available" = "20%"
+  # amiSelector:
+  #   karpenter.sh/discovery: my-cluster
+  tags:
+    karpenter.sh/cluster_name: {{.Values.spec.clusterName}}
+    karpenter.sh/provisioner: burnham
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 2
+    httpTokens: require
+---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
 metadata:
@@ -13,20 +45,14 @@ spec:
     - key: karpenter.sh/capacity-type
       operator: In
       values: ['on-demand', 'spot']
-  provider:
-    apiVersion: extensions.karpenter.sh/v1alpha1
-    kind: AWS
-    instanceProfile: {{ .Values.spec.karpenterInstanceProfile }}
-    securityGroupSelector:
-      kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'
-      #aws:eks:cluster-name: '{{ .Values.spec.clusterName }}'
-    subnetSelector:
-      kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'
-      #aws:cloudformation:stack-name: '{{ .Values.spec.clusterName }}'
-    tags:
-      karpenter.sh/cluster_name: {{ .Values.spec.clusterName }}
-      karpenter.sh/provisioner: burnham
+  providerRef:
+    name: karpenter-bottlerocket
   ttlSecondsAfterEmpty: 0
+  ttlSecondsUntilExpired: 2592000 # 30 Days = 60 * 60 * 24 * 30 Seconds;
+  # Priority given to the provisioner when the scheduler considers which provisioner
+  # to select. Higher weights indicate higher priority when comparing provisioners.
+  # Specifying no weight is equivalent to specifying a weight of 0.
+  weight: 10  
   limits:
     resources:
       cpu: '200'
@@ -35,15 +61,17 @@ spec:
     team: burnham
     type: karpenter
   taints:
-  - key: burnham
-    value: 'true'
-    effect: NoSchedule
+    - key: burnham
+      value: 'true'
+      effect: NoSchedule
 ---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
 metadata:
   name: default
 spec:
+  consolidation:
+    enabled: true
   requirements:
     # - key: 'node.kubernetes.io/instance-type'
     #   operator: In
@@ -54,25 +82,15 @@ spec:
     - key: karpenter.sh/capacity-type
       operator: In
       values: ['on-demand', 'spot']
-  provider:
-    apiVersion: extensions.karpenter.sh/v1alpha1
-    kind: AWS
-    #instanceProfile: {{ .Values.spec.karpenterInstanceProfile }}
-    instanceProfile: {{ .Values.spec.clusterName }}-managed-ondemand
-    securityGroupSelector:
-      #kubernetes.io/cluster/demo: '*'
-      #kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'      
-      #aws:eks:cluster-name: '${eks-cluster-id}' # Choose only security groups of nodes
-      aws:eks:cluster-name: '{{ .Values.spec.clusterName }}' # Choose only security groups of nodes      
-    subnetSelector:
-      kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'    
-      #kubernetes.io/cluster/${eks-cluster-id}: '*'
-      kubernetes.io/role/internal-elb: '1' # to select only private subnets
-    tags:
-      #karpenter.sh/cluster_name: ${eks-cluster-id}
-      karpenter.sh/cluster_name: {{ .Values.spec.clusterName }}      
-      karpenter.sh/provisioner: default
+  providerRef:
+    name: karpenter-bottlerocket
+
   ttlSecondsAfterEmpty: 60
+  ttlSecondsUntilExpired: 2592000 # 30 Days = 60 * 60 * 24 * 30 Seconds;
+  # Priority given to the provisioner when the scheduler considers which provisioner
+  # to select. Higher weights indicate higher priority when comparing provisioners.
+  # Specifying no weight is equivalent to specifying a weight of 0.
+  weight: 0
   limits:
     resources:
       cpu: '200'
@@ -84,3 +102,14 @@ spec:
   #   - key: karpenter
   #     value: 'true'
   #     effect: NoSchedule
+
+  # Karpenter provides the ability to specify a few additional Kubelet args.
+  # These are all optional and provide support for additional customization and use cases.
+  kubeletConfiguration:
+    #clusterDNS: ["10.0.1.100"]
+    containerRuntime: containerd
+    systemReserved:
+      cpu: 1
+      memory: 5Gi
+      ephemeral-storage: 2Gi
+    #maxPods: 20
