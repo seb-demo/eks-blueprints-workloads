@@ -72,6 +72,7 @@ metadata:
 spec:
   consolidation:
     enabled: true
+  #ttlSecondsAfterEmpty: 60 # mutual exclusive with consolitation
   requirements:
     # - key: 'node.kubernetes.io/instance-type'
     #   operator: In
@@ -85,7 +86,6 @@ spec:
   providerRef:
     name: karpenter-bottlerocket
 
-  ttlSecondsAfterEmpty: 60
   ttlSecondsUntilExpired: 2592000 # 30 Days = 60 * 60 * 24 * 30 Seconds;
   # Priority given to the provisioner when the scheduler considers which provisioner
   # to select. Higher weights indicate higher priority when comparing provisioners.
