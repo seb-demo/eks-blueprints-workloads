@@ -4,7 +4,7 @@ metadata:
   name: karpenter-bottlerocket
 spec:
   amiFamily: Bottlerocket
-  instanceProfile: {{.Values.spec.karpenterInstanceProfile}}
+  instanceProfile: '{{ .Values.spec.karpenterInstanceProfile }}'
   #instanceProfile: {{ .Values.spec.clusterName }}-managed-ondemand
   subnetSelector:
     kubernetes.io/cluster/{{ .Values.spec.clusterName }}: '*'
