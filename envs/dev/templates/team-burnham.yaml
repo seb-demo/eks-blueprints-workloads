@@ -26,6 +26,8 @@ spec:
           value: {{.Values.spec.env}}
         - name: spec.blueprint
           value: {{.Values.spec.blueprint}}
+        - name: spec.karpenterInstanceProfile
+          value: {{.Values.spec.karpenterInstanceProfile}}          
         - name: spec.clusterName
           value: {{.Values.spec.clusterName}}
   syncPolicy:
