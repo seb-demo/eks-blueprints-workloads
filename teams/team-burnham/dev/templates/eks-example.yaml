@@ -80,6 +80,13 @@ spec:
           image: public.ecr.aws/seb-demo/eks-example:a213b841
           ports:
             - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 250m
+              memory: 50Mi            
       # nodeSelector:
       #   team: burnham
       #   type: karpenter
