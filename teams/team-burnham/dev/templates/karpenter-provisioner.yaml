@@ -65,7 +65,7 @@ spec:
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
 metadata:
-  name: burnham
+  name: burnham2
 spec:
   requirements:
     # - key: 'node.kubernetes.io/instance-type'
@@ -91,10 +91,10 @@ spec:
       cpu: '200'
   labels:
     billing-team: burnham
-    team: burnham
+    team: burnham2
     type: karpenter
   taints:
-    - key: burnham
+    - key: burnham2
       value: 'true'
       effect: NoSchedule
 ---
