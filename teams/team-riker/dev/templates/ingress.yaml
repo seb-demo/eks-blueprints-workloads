@@ -35,9 +35,6 @@ spec:
 {{ else }}
   - host:  
 {{ end }}  
-{{ else }}
-  - host:  
-{{ end }}  
     http:
       paths:
       - path: /
