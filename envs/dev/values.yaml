@@ -4,6 +4,6 @@ spec:
   source:
     repoURL: https://github.com/seb-tmp/eks-blueprints-workloads
     targetRevision: main
-  ingress:
-    host: 
-    type:
+  # ingress:
+  #   host: 
+  #   type:
