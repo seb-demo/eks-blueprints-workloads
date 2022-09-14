@@ -11,7 +11,7 @@ metadata:
 {{ else }}    
     {{ if .Values.spec.ingress.host }} # we can't use grouping without custom domain    
     alb.ingress.kubernetes.io/group.name: burnham
-    {{ else }}
+    {{ end }}
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: 'ip'
   {{ if .Values.spec.ingress.host }}
