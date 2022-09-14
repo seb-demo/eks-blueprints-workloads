@@ -11,3 +11,4 @@ spec:
   ingress:
     type: 'nginx/alb'
     host:
+

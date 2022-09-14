@@ -47,5 +47,3 @@ spec:
             name: guestbook-ui
             port: 
               number: 80
-        
-        
