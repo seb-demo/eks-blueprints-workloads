@@ -24,7 +24,7 @@ spec:
 {{ end }}  
   rules:
 {{ if .Values.spec.ingress.host }}
-  - host: guestbook.{{ .Values.spec.ingress.host }}
+  - host: ho11y.{{ .Values.spec.ingress.host }}
 {{ else }}
   - host:  
 {{ end }}   
