@@ -2,8 +2,13 @@ spec:
   destination:
     server: https://kubernetes.default.svc
   source:
-    repoURL: https://github.com/seb-tmp/eks-blueprints-workloads
+    repoURL: https://github.com/seb-demo/eks-blueprints-workloads
     targetRevision: main
-  # ingress:
-  #   host: 
-  #   type:
+  env: dev
+  clusterName:
+  blueprint: 'cdk/terraform'
+  karpenterInstanceProfile:
+  ingress:
+    type: 'nginx/alb'
+    host:
+

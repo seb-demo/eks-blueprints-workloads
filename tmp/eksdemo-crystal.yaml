@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ecsdemo-crystal
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: eksdemo-crystal
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/aws-containers/ecsdemo-crystal.git
+    targetRevision: main
+    path: kubernetes/helm/ecsdemo-crystal
+    helm:
+      parameters:
+      - name: ingress.enabled
+        value: true
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

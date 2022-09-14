@@ -3,8 +3,12 @@ kind: Ingress
 metadata:
   name: riker-ingress
   namespace: team-riker
+  labels:
+    app: burnham-ingress-{{ .Values.spec.env }}  
   annotations:
-{{ if eq .Values.spec.ingress.type "alb" }}  
+{{ if eq .Values.spec.ingress.type "nginx" }}  
+    kubernetes.io/ingress.class: "nginx"
+{{ else }}
     #rewrite does not exist yet in ALB
     #https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1571
     #so commenting grouping feature
@@ -21,13 +25,16 @@ metadata:
 {{ end }}
 spec:
 {{ if eq .Values.spec.ingress.type "nginx" }}  
-  ingressClassName: nginx    
+  kubernetes.io/ingress.class: "nginx"
 {{ else }}
   ingressClassName: alb
-{{ end }}  
+{{ end }}
   rules:
 {{ if .Values.spec.ingress.host }}
   - host: guestbook-ui.{{ .Values.spec.ingress.host }}
+{{ else }}
+  - host:  
+{{ end }}  
 {{ else }}
   - host:  
 {{ end }}  
