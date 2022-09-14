@@ -143,7 +143,7 @@ spec:
     #clusterDNS: ["10.0.1.100"]
     containerRuntime: containerd
     systemReserved:
-      cpu: 1
+      cpu: '1'
       memory: 5Gi
       ephemeral-storage: 2Gi
     #maxPods: 20
