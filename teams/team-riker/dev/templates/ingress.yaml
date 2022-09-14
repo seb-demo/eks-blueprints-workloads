@@ -21,7 +21,6 @@ spec:
   ingressClassName: alb
 {{ end }}  
   rules:
-#{{ if not (eq .Values.spec.ingress.host "dev.example.com") }}
 {{ if .Values.spec.ingress.host }}
   - host: guestbook-ui.{{ .Values.spec.ingress.host }}
 {{ else }}
@@ -36,5 +35,3 @@ spec:
             name: guestbook-ui
             port: 
               number: 80
-        
-        
