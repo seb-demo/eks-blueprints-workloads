@@ -19,8 +19,7 @@ spec:
     helm:
     helm:
       values: |
-        external-dns:
-        {{- toYaml .Values | nindent 10 }}    
+        {{- toYaml .Values | nindent 8 }}    
       # parameters:
       # - name: spec.ingress.host
       #   value: {{ .Values.spec.ingress.host }}
