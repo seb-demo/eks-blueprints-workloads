@@ -4,11 +4,10 @@ spec:
   source:
     repoURL: https://github.com/seb-demo/eks-blueprints-workloads
     targetRevision: main
-  env: dev
-  clusterName:
-  blueprint: 'cdk/terraform'
-  karpenterInstanceProfile:
-  ingress:
-    type: 'nginx/alb'
-    host:
-
+  # env: dev
+  # clusterName:
+  # blueprint: 'cdk/terraform'
+  # karpenterInstanceProfile:
+  # ingress:
+  #   type: 'nginx/alb'
+  #   host:
