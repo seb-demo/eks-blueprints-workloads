@@ -17,13 +17,17 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     path: teams/team-riker/dev
     helm:
-      parameters:
-      - name: spec.ingress.host
-        value: {{ .Values.spec.ingress.host }}
-      - name: spec.ingress.type
-        value: {{ .Values.spec.ingress.type }}
-      - name: spec.env
-        value: {{ .Values.spec.env }}           
+    helm:
+      values: |
+        external-dns:
+        {{- toYaml .Values | nindent 10 }}    
+      # parameters:
+      # - name: spec.ingress.host
+      #   value: {{ .Values.spec.ingress.host }}
+      # - name: spec.ingress.type
+      #   value: {{ .Values.spec.ingress.type }}
+      # - name: spec.env
+      #   value: {{ .Values.spec.env }}           
   syncPolicy:
     automated:
       prune: true
