@@ -17,9 +17,8 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     path: teams/team-riker/dev
     helm:
-    helm:
       values: |
-        {{- toYaml .Values | nindent 8 }}     
+        {{- toYaml .Values | nindent 8 }}
   syncPolicy:
     automated:
       prune: true

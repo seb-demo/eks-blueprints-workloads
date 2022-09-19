@@ -4,24 +4,27 @@ metadata:
   name: team-geordie
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
     namespace: geordie
-    server: {{ .Values.spec.destination.server }}
+    server: {{.Values.spec.destination.server}}
   source:
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    repoURL: {{.Values.spec.source.repoURL}}
+    targetRevision: {{.Values.spec.source.targetRevision}}
     path: teams/team-geordie/dev
     helm:
-      parameters:
-      - name: spec.ingress.host
-        value: {{ .Values.spec.ingress.host }}
-      - name: spec.ingress.type
-        value: {{ .Values.spec.ingress.type }}    
+      values: |
+        {{- toYaml .Values | nindent 8 }}
+    # helm:
+    #   parameters:
+    #   - name: spec.ingress.host
+    #     value: {{ .Values.spec.ingress.host }}
+    #   - name: spec.ingress.type
+    #     value: {{ .Values.spec.ingress.type }}
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
