@@ -40,8 +40,16 @@ spec:
           value: 'internet-facing'
         - name: ingress.annotations.alb\.ingress\.kubernetes\.io/target-type
           value: 'ip'
+        {{ if .Values.spec.ingress.host }}
         - name: ingress.annotations.alb\.ingress\.kubernetes\.io/listen-ports
-          value: '[{"HTTP": 80}]'
+          value: '[{"HTTP":80,"HTTPS": 443}]'
+        - name: ingress.annotations.alb\.ingress\.kubernetes\.io/ssl-redirect
+          value: '443'                    
+        {{ else }}
+        - name: ingress.annotations.alb\.ingress\.kubernetes\.io/listen-ports
+          value: '[{"HTTP": 80}]'        
+        {{ end }}
+
         - name: ingress.annotations.alb\.ingress\.kubernetes\.io/tags
           value: 'Environment=dev,Team=ecsdemo'
         - name: ingress.hosts[0].host
