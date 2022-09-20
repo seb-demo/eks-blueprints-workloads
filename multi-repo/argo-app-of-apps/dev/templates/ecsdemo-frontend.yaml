@@ -27,6 +27,8 @@ spec:
     targetRevision: {{.Values.spec.apps.ecsdemoFrontend.targetRevision}}
     path: {{.Values.spec.apps.ecsdemoFrontend.path}}
     helm:
+      values: |
+        {{- toYaml .Values | nindent 8 }}
       parameters:
         - name: ingress.enabled
           value: 'true'
@@ -43,7 +45,7 @@ spec:
         - name: ingress.annotations.alb\.ingress\.kubernetes\.io/tags
           value: 'Environment=dev,Team=ecsdemo'
         - name: ingress.hosts[0].host
-          value: ''
+          value: 'frontend.{{.Values.spec.ingress.host}}'
         - name: ingress.hosts[0].paths[0].path
           value: '/'
         - name: ingress.hosts[0].paths[0].pathType

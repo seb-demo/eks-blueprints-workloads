@@ -1,6 +1,7 @@
 spec:
   destination:
     server: https://kubernetes.default.svc
+# All helm parameters are sent by IaC code (Terraform or CDK)      
   apps:
     ecsdemoFrontend:
       repoURL: https://github.com/aws-containers/ecsdemo-frontend.git      
