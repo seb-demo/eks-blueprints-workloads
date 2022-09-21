@@ -28,8 +28,7 @@ spec:
     path: {{.Values.spec.apps.ecsdemoFrontend.path}}
     helm:
       values: |
-        test: ok
-        {{- toYaml .Values | nindent 8 }}
+        {{- toYaml .Values.spec.apps.ecsdemoFrontend | nindent 8 }}
       parameters:
         - name: ingress.enabled
           value: 'true'
