@@ -7,6 +7,13 @@ spec:
       repoURL: https://github.com/aws-containers/ecsdemo-frontend.git      
       targetRevision: main
       path: kubernetes/helm/ecsdemo-frontend
+      ingress:
+        enabled: 'true'
+        className: 'alb'
+        hosts:
+          paths:
+            path: "/"
+            pathType: "Prefix"
     ecsdemoNodejs:
       repoURL: https://github.com/aws-containers/ecsdemo-nodejs.git
       targetRevision: main
