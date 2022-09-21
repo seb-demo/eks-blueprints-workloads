@@ -34,19 +34,17 @@ spec:
           value: 'true'
         - name: ingress.className
           value: 'alb'
-        - name: ingress.annotations.alb\.ingress\.kubernetes\.io/group\.name
-          value: 'ecsdemo'
-        - name: ingress.annotations.alb\.ingress\.kubernetes\.io/scheme
-          value: 'internet-facing'
-        - name: ingress.annotations.alb\.ingress\.kubernetes\.io/target-type
-          value: 'ip'
+        # - name: ingress.annotations.alb\.ingress\.kubernetes\.io/group\.name
+        #   value: 'ecsdemo'
+        # - name: ingress.annotations.alb\.ingress\.kubernetes\.io/target-type
+        #   value: 'ip'
         {{ if .Values.spec.ingress.host }}
-        - name: ingress.annotations.external-dns\.alpha\.kubernetes\.io/set-identifier
-          value : '{{ .Values.spec.clusterName }}'
+        # - name: ingress.annotations.external-dns\.alpha\.kubernetes\.io/set-identifier
+        #   value : '{{ .Values.spec.clusterName }}'
         # - name: ingress.annotations.external-dns\.alpha\.kubernetes\.io/aws-weight
         #   value: '{{ .Values.spec.ingress.route53_weight }}'
-        - name: ingress.annotations.alb\.ingress\.kubernetes\.io/listen-ports
-          value: '[{"HTTP":80,"HTTPS": 443}]'
+        # - name: ingress.annotations.alb\.ingress\.kubernetes\.io/listen-ports
+        #   value: '[{"HTTP":80,"HTTPS": 443}]'
         # - name: ingress.annotations.alb\.ingress\.kubernetes\.io/ssl-redirect
         #   value: '443'    
         {{ else }}
