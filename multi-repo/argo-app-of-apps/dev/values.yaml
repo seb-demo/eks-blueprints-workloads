@@ -8,12 +8,17 @@ spec:
       targetRevision: main
       path: kubernetes/helm/ecsdemo-frontend
       ingress:
-        enabled: 'true'
-        className: 'alb'
+        enabled: true
+        annotations:
+          alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+          alb.ingress.kubernetes.io/scheme: internet-facing
+          alb.ingress.kubernetes.io/tags: Environment=dev,Team=ecsdemo-frontend
+          alb.ingress.kubernetes.io/target-type: ip
+        className: alb
         hosts:
-          paths:
-            path: "/"
-            pathType: "Prefix"
+          - paths:
+              - path: /
+                pathType: Prefix       
     ecsdemoNodejs:
       repoURL: https://github.com/aws-containers/ecsdemo-nodejs.git
       targetRevision: main
