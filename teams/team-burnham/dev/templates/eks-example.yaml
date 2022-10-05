@@ -80,6 +80,7 @@ spec:
       containers:
         - name: eks-example
           image: public.ecr.aws/seb-demo/eks-example:cluster-name
+          imagePullPolicy: Always
           env:
           - name: CLUSTER_NAME
             value: {{ .Values.spec.clusterName }}
