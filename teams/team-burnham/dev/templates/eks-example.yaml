@@ -82,7 +82,7 @@ spec:
           image: public.ecr.aws/seb-demo/eks-example:cluster-name
           env:
           - name: CLUSTER_NAME
-            value: {{ .Values.spec.env }}
+            value: {{ .Values.spec.clusterName }}
           ports:
             - containerPort: 80
           resources:
