@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: guestbook-ui
   labels:
-    app: burnham-ingress-{{ .Values.spec.env }}  
+    app: burnham-ingress-{{ .Values.spec.env }}
 spec:
   replicas: 1
   revisionHistoryLimit: 3

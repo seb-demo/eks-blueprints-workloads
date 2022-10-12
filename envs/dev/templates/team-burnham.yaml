@@ -4,17 +4,17 @@ metadata:
   name: team-burnham
   namespace: argocd
   labels:
-    env: {{.Values.spec.env}}
+    env: {{ .Values.spec.env }}
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
     namespace: team-burnham
-    server: {{.Values.spec.destination.server}}
+    server: {{ .Values.spec.destination.server }}
   source:
-    repoURL: {{.Values.spec.source.repoURL}}
-    targetRevision: {{.Values.spec.source.targetRevision}}
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
     path: teams/team-burnham/dev
     helm:
       values: |
@@ -23,4 +23,4 @@ spec:
     automated:
       prune: true
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true

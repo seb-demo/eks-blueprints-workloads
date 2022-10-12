@@ -1,10 +1,10 @@
 spec:
   destination:
     server: https://kubernetes.default.svc
-# All helm parameters are sent by IaC code (Terraform or CDK)      
+# All helm parameters can be sent by IaC code (Terraform or CDK)
   apps:
     ecsdemoFrontend:
-      repoURL: https://github.com/aws-containers/ecsdemo-frontend.git      
+      repoURL: https://github.com/aws-containers/ecsdemo-frontend.git 
       targetRevision: main
       path: kubernetes/helm/ecsdemo-frontend
       ingress:
@@ -18,7 +18,7 @@ spec:
         hosts:
           - paths:
               - path: /
-                pathType: Prefix       
+                pathType: Prefix
     ecsdemoNodejs:
       repoURL: https://github.com/aws-containers/ecsdemo-nodejs.git
       targetRevision: main

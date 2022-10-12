@@ -6,18 +6,18 @@ metadata:
   labels:
     app: burnham-ingress-{{ .Values.spec.env }}
   annotations:
-{{ if eq .Values.spec.ingress.type "nginx" }} 
-    #nginx annotations  
-{{ else }}    
+{{ if eq .Values.spec.ingress.type "nginx" }}
+    #nginx annotations
+{{ else }}
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: 'ip' 
-  {{ if .Values.spec.ingress.host }} # we can't use grouping without custom domain    
+    alb.ingress.kubernetes.io/target-type: 'ip'
+  {{ if .Values.spec.ingress.host }} # we can't use grouping without custom domain
     alb.ingress.kubernetes.io/group.name: burnham
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80,"HTTPS": 443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
   {{ else }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-  {{ end }}     
+  {{ end }}
     alb.ingress.kubernetes.io/backend-protocol: 'HTTP'
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=Burnham
 {{ end }}
@@ -25,16 +25,16 @@ metadata:
     external-dns.alpha.kubernetes.io/aws-weight: '{{ .Values.spec.ingress.route53_weight }}'
     external-dns.alpha.kubernetes.io/ttl: "10"
 spec:
-{{ if eq .Values.spec.ingress.type "nginx" }}  
+{{ if eq .Values.spec.ingress.type "nginx" }}
   kubernetes.io/ingress.class: "nginx"
 {{ else }}
   ingressClassName: alb
 {{ end }}
   rules:
-{{ if .Values.spec.ingress.host }}  
-  - host: burnham.{{ .Values.spec.ingress.host }}  
-{{ else }}  
-  - host: 
+{{ if .Values.spec.ingress.host }}
+  - host: burnham.{{ .Values.spec.ingress.host }}
+{{ else }}
+  - host:
 {{ end }}
     http:
       paths:
@@ -43,7 +43,7 @@ spec:
         backend:
           service:
             name: burnham
-            port: 
+            port:
               number: 80
 ---
 apiVersion: v1
@@ -92,7 +92,7 @@ spec:
               memory: 512Mi
             requests:
               cpu: 250m
-              memory: 50Mi            
+              memory: 50Mi
       # nodeSelector:
       #   team: burnham
       #   type: karpenter

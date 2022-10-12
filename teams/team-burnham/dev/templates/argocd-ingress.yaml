@@ -7,12 +7,12 @@ metadata:
     app: argocd-{{ .Values.spec.env }}
     team: burnham
   annotations:
-{{ if eq .Values.spec.ingress.type "nginx" }} 
-    #nginx annotations  
+{{ if eq .Values.spec.ingress.type "nginx" }}
+    #nginx annotations
 {{ else }}
   {{ if .Values.spec.ingress.host }}  # we can't use grouping without custom domain
     alb.ingress.kubernetes.io/group.name: burnham
-  {{ end }}    
+  {{ end }}
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: 'ip'
   {{ if .Values.spec.ingress.host }}
@@ -21,17 +21,17 @@ metadata:
   {{ else }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
   {{ end }}
-  {{ if eq .Values.spec.ingress.host "cdk" }}      
+  {{ if eq .Values.spec.ingress.host "cdk" }}
     alb.ingress.kubernetes.io/backend-protocol: 'HTTP'
   {{ else }}
     alb.ingress.kubernetes.io/backend-protocol: 'HTTPS'
-  {{ end }} 
+  {{ end }}
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=Burnham
-{{ end }}     
+{{ end }}
     link.argocd.argoproj.io/external-link: 'https://eu-west-3.console.aws.amazon.com/cloudwatch/home?region=eu-west-3#container-insights:performance'
 
 spec:
-{{ if eq .Values.spec.ingress.type "nginx" }}  
+{{ if eq .Values.spec.ingress.type "nginx" }}
   kubernetes.io/ingress.class: "nginx"
 {{ else }}
   ingressClassName: alb
@@ -39,9 +39,9 @@ spec:
   rules:
 {{ if .Values.spec.ingress.host }}
     - host: argocd.{{ .Values.spec.ingress.host }}
-{{ else }}  
-    - host: 
-{{ end }}    
+{{ else }}
+    - host:
+{{ end }}  
       http:
         paths:
           - path: /
@@ -55,28 +55,3 @@ spec:
 {{ end }}
                 port:
                   number: 80
----
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: argocd-ingress-nginx
-#   namespace: argocd
-#   labels:
-#     app: argocd-{{ .Values.spec.env }}
-#     team: burnham
-#   annotations:
-#     kubernetes.io/ingress.class: 'nginx'
-#     nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
-#     nginx.ingress.kubernetes.io/ssl-passthrough: 'true'
-# spec:
-#   rules:
-#     - host: argocdnginx.{{ .Values.spec.ingress.host }}
-#       http:
-#         paths:
-#           - path: /
-#             pathType: Prefix
-#             backend:
-#               service: 
-#                 name: blueprints-addon-argocd-server
-#                 port:
-#                   number: 80

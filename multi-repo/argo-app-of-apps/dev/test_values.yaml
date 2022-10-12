@@ -14,7 +14,7 @@ spec:
           'alb.ingress.kubernetes.io/group.name': 'ecsdemo'
           'alb.ingress.kubernetes.io/scheme': 'internet-facing'
           'alb.ingress.kubernetes.io/target-type': 'ip'
-          'external-dns.alpha.kubernetes.io/set-identifier': 'eks-blueprint-blue'          
+          'external-dns.alpha.kubernetes.io/set-identifier': 'eks-blueprint-blue'
         hosts:
           host: test.example.com
           paths:

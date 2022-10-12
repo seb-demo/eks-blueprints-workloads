@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: guestbook-ui
   labels:
-    app: burnham-ingress-{{ .Values.spec.env }}  
+    app: burnham-ingress-{{ .Values.spec.env }}
 spec:
   ports:
   - port: 80

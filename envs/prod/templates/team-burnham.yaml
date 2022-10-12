@@ -4,7 +4,7 @@ metadata:
   name: team-burnham
   namespace: argocd
   labels:
-    env: {{ .Values.spec.env }}    
+    env: {{ .Values.spec.env }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -21,7 +21,7 @@ spec:
       - name: spec.ingress.host
         value: {{ .Values.spec.ingress.host }}
       - name: spec.env
-        value: {{ .Values.spec.env }}    
+        value: {{ .Values.spec.env }}
   syncPolicy:
     automated:
       prune: true

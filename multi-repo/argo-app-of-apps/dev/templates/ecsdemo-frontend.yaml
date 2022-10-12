@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
-    - resources-finalizer.argocd.argoproj.io  
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destinations:
     - namespace: ecsdemo-frontend
@@ -24,11 +24,11 @@ spec:
   project: ecsdemo-frontend
   destination:
     namespace: ecsdemo-frontend
-    server: {{.Values.spec.destination.server}}
+    server: {{ .Values.spec.destination.server }}
   source:
-    repoURL: {{.Values.spec.apps.ecsdemoFrontend.repoURL}}
-    targetRevision: {{.Values.spec.apps.ecsdemoFrontend.targetRevision}}
-    path: {{.Values.spec.apps.ecsdemoFrontend.path}}
+    repoURL: {{ .Values.spec.apps.ecsdemoFrontend.repoURL }}
+    targetRevision: {{ .Values.spec.apps.ecsdemoFrontend.targetRevision }}
+    path: {{ .Values.spec.apps.ecsdemoFrontend.path }}
     helm:
       values: |-
       {{ toYaml .Values.spec.apps.ecsdemoFrontend | nindent 8 }}

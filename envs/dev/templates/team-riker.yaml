@@ -4,7 +4,7 @@ metadata:
   name: team-riker
   namespace: argocd
   labels:
-    env: {{ .Values.spec.env }}  
+    env: {{ .Values.spec.env }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:

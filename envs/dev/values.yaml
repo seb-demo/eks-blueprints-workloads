@@ -3,7 +3,7 @@ spec:
     server: https://kubernetes.default.svc
 # All helm parameters are sent by IaC code (Terraform or CDK)  
   # source:
-  #   repoURL: https://github.com/seb-demo/eks-blueprints-workloads
+  #   repoURL: https://github.com/aws-samples/eks-blueprints-workloads
   #   targetRevision: main
   # env: dev
   # clusterName: <name of the cluster>

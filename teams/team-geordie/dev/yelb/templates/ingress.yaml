@@ -33,7 +33,7 @@ spec:
 {{ if .Values.spec.ingress.host }}
   - host: yelb.{{ .Values.spec.ingress.host }}
 {{ else }}
-  - host: 
+  - host:
 {{ end }}
     http:
       paths:
