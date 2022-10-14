@@ -17,11 +17,8 @@ spec:
     path: teams/team-burnham/prod
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
-      parameters:
-      - name: spec.ingress.host
-        value: {{ .Values.spec.ingress.host }}
-      - name: spec.env
-        value: {{ .Values.spec.env }}
+      values: |
+        {{- toYaml .Values | nindent 8 }}
   syncPolicy:
     automated:
       prune: true

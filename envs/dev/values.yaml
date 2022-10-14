@@ -1,14 +1,15 @@
 spec:
   destination:
     server: https://kubernetes.default.svc
-# All helm parameters are sent by IaC code (Terraform or CDK)
-# source:
-#   repoURL: https://github.com/aws-samples/eks-blueprints-workloads
-#   targetRevision: main
-# env: dev
-# clusterName: <name of the cluster>
-# blueprint: 'cdk/terraform'
-# karpenterInstanceProfile:
-# ingress:
-#   type: 'nginx/alb'
-#   host:
+  source:
+    repoURL: https://github.com/aws-samples/eks-blueprints-workloads
+    targetRevision: main
+
+  # Thoses default values can be surcharged by Infrastructure as Code
+  env: dev
+  clusterName: eks-blueprint-cluster # the name of EKS cluster
+  blueprint: 'terraform' # cdk | terraform
+  karpenterInstanceProfile:
+  ingress:
+    type: 'alb' # nginx | alb
+    host: # empty or your domain like dev.example.com

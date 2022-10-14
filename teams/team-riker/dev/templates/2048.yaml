@@ -39,6 +39,7 @@ spec:
       securityContext: {}
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
+      {{ if .Values.spec.karpenterInstanceProfile }}
       nodeSelector:
         team: default
         type: karpenter
@@ -46,6 +47,7 @@ spec:
         - key: 'karpenter'
           operator: 'Exists'
           effect: 'NoSchedule'
+      {{ end }}
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
@@ -85,11 +87,13 @@ metadata:
   {{ else }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
   {{ end }}
-    alb.ingress.kubernetes.io/tags: Environment=dev,Team=Riker
+    alb.ingress.kubernetes.io/tags: Environment={{ .Values.spec.env }},Team=Riker
 {{ end }}
+  {{ if .Values.spec.ingress.host }}
     external-dns.alpha.kubernetes.io/set-identifier: {{ .Values.spec.clusterName }}
     external-dns.alpha.kubernetes.io/aws-weight: '{{ .Values.spec.ingress.route53_weight }}'
     external-dns.alpha.kubernetes.io/ttl: "10"
+  {{ end }}     
 spec:
 {{ if eq .Values.spec.ingress.type "nginx" }}
   kubernetes.io/ingress.class: "nginx"
