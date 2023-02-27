@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: inflate
+  labels:
+    app: inflate  
     {{- toYaml .Values.labels | nindent 4 }}  
 spec:
   replicas: 0
