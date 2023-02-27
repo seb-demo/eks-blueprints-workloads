@@ -26,20 +26,20 @@ spec:
     #     - '33'
 
     # Default values
-    #  - key: kubernetes.io/os
-	  #     operator: In
-	  #     values:
-	  #       - linux
-	  #   - key: karpenter.k8s.aws/instance-category
-	  #     operator: In
-	  #     values:
-	  #       - c
-	  #       - m
-	  #       - r
-	  #   - key: karpenter.k8s.aws/instance-generation
-	  #     operator: Gt
-	  #     values:
-	  #       - '2'
+    - key: kubernetes.io/os
+      operator: In
+      values:
+        - linux
+    - key: karpenter.k8s.aws/instance-category
+      operator: In
+      values:
+        - c
+        - m
+        - r
+    - key: karpenter.k8s.aws/instance-generation
+      operator: Gt
+      values:
+        - '2'
 
     - key: 'kubernetes.io/arch'
       operator: In
