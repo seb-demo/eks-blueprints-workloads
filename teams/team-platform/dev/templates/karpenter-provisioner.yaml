@@ -23,7 +23,24 @@ spec:
     # - key: karpenter.k8s.aws/instance-cpu
     #   operator: Lt
     #   values:
-    #     - '33'    
+    #     - '33'
+
+    # Default values
+    #  - key: kubernetes.io/os
+	  #     operator: In
+	  #     values:
+	  #       - linux
+	  #   - key: karpenter.k8s.aws/instance-category
+	  #     operator: In
+	  #     values:
+	  #       - c
+	  #       - m
+	  #       - r
+	  #   - key: karpenter.k8s.aws/instance-generation
+	  #     operator: Gt
+	  #     values:
+	  #       - '2'
+
     - key: 'kubernetes.io/arch'
       operator: In
       values: ['amd64']
@@ -59,5 +76,5 @@ spec:
       cpu: '1'
       memory: 5Gi
       ephemeral-storage: 2Gi
-    #maxPods: 110    
+    maxPods: 110
 {{ end }}
