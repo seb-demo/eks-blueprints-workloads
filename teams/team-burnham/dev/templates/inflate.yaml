@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: inflate
+    {{- toYaml .Values.labels | nindent 4 }}  
 spec:
   replicas: 0
   selector:
@@ -17,5 +18,18 @@ spec:
         - name: inflate
           image: public.ecr.aws/eks-distro/kubernetes/pause:3.7
           resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
             requests:
-              cpu: 1
+              cpu: 250m
+              memory: 50Mi
+      {{ if .Values.spec.karpenterInstanceProfile }}
+      nodeSelector:
+        team: burnham
+        type: karpenter
+      tolerations:
+        - key: 'burnham'
+          operator: 'Exists'
+          effect: 'NoSchedule'
+      {{ end }}              
