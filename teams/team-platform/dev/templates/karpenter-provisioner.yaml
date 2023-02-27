@@ -9,7 +9,7 @@ metadata:
 spec:
   consolidation:
     enabled: false
-  #ttlSecondsAfterEmpty: 60 # mutual exclusive with consolitation
+  ttlSecondsAfterEmpty: 10 # mutual exclusive with consolitation
   requirements:
     # - key: karpenter.k8s.aws/instance-family
     #   operator: NotIn
