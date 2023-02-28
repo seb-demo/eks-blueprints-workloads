@@ -32,9 +32,8 @@ spec:
     targetRevision: {{ .Values.spec.apps.ecsdemoNodejs.targetRevision }}
     path: {{ .Values.spec.apps.ecsdemoNodejs.path }}
     helm:
-      parameters:
-        - name: replicaCount
-          value: '3'    
+      values: |-
+      {{ toYaml .Values.spec.apps.ecsdemoNodejs | nindent 8 }}
   syncPolicy:
     automated:
       prune: true
