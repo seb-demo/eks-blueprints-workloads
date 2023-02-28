@@ -27,8 +27,15 @@ spec:
       #repoURL: git@github.com:aws-containers/ecsdemo-nodejs.git
       targetRevision: main
       path: kubernetes/helm/ecsdemo-nodejs
+      image:
+        repository: 'public.ecr.aws/seb-demo/ecsdemo-nodejs'
+        tag: 'latest'
+
     ecsdemoCrystal:
       repoURL: https://github.com/allamand/ecsdemo-crystal.git
       #repoURL: git@github.com:aws-containers/ecsdemo-crystal.git
       targetRevision: main
       path: kubernetes/helm/ecsdemo-crystal
+      image:
+        repository: 'public.ecr.aws/seb-demo/ecsdemo-crystal'
+        tag: 'latest'
