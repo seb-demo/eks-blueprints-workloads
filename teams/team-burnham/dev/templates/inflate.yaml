@@ -34,4 +34,11 @@ spec:
         - key: 'burnham'
           operator: 'Exists'
           effect: 'NoSchedule'
-      {{ end }}              
+      {{ end }}
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: inflate
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule      
