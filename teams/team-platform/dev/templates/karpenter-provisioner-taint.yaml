@@ -76,5 +76,5 @@ spec:
       cpu: '1'
       memory: 5Gi
       ephemeral-storage: 2Gi
-    maxPods: 110
+    #maxPods: 110
 {{ end }}
