@@ -28,10 +28,9 @@ spec:
               memory: 50Mi
       {{ if .Values.spec.karpenterInstanceProfile }}
       nodeSelector:
-        team: default
-        type: karpenter
+        karpenter.sh/provisioner-name: taint
       tolerations:
-        - key: 'burnham'
+        - key: 'karpenter'
           operator: 'Exists'
           effect: 'NoSchedule'
       {{ end }}
