@@ -11,15 +11,15 @@ spec:
     enabled: true
   #ttlSecondsAfterEmpty: 10 # mutual exclusive with consolitation
   requirements:
-    # - key: karpenter.k8s.aws/instance-family
-    #   operator: NotIn
-    #   values:
-    #     - a1
-    #     - c1
-    #     - c3
-    #     - inf1
-    #     - t3
-    #     - t2
+    - key: karpenter.k8s.aws/instance-family
+      operator: NotIn
+      values:
+        - a1
+        - c1
+        - c3
+        - inf1
+        - t3
+        - t2
     # - key: karpenter.k8s.aws/instance-cpu
     #   operator: Lt
     #   values:
@@ -30,12 +30,12 @@ spec:
       operator: In
       values:
         - linux
-    - key: karpenter.k8s.aws/instance-category
-      operator: In
-      values:
-        - c
-        - m
-        - r
+    # - key: karpenter.k8s.aws/instance-category
+    #   operator: In
+    #   values:
+    #     - c
+    #     - m
+    #     - r
     - key: karpenter.k8s.aws/instance-generation
       operator: Gt
       values:
@@ -57,7 +57,7 @@ spec:
   weight: 1
   limits:
     resources:
-      cpu: '20k'
+      cpu: '40k'
   labels:
     billing-team: default
     team: platform
