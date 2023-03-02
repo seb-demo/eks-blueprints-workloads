@@ -34,10 +34,10 @@ spec:
           operator: 'Exists'
           effect: 'NoSchedule'
       {{ end }}
-      # topologySpreadConstraints:
-      #   - labelSelector:
-      #       matchLabels:
-      #         app: inflate
-      #     maxSkew: 1
-      #     topologyKey: topology.kubernetes.io/zone
-      #     whenUnsatisfiable: DoNotSchedule      
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: inflate
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule      
