@@ -8,8 +8,8 @@ metadata:
     {{- toYaml .Values.labels | nindent 4 }}
 spec:
   consolidation:
-    enabled: true
-  #ttlSecondsAfterEmpty: 10 # mutual exclusive with consolitation
+    enabled: false
+  ttlSecondsAfterEmpty: 10 # mutual exclusive with consolitation
   requirements:
     - key: karpenter.k8s.aws/instance-family
       operator: NotIn
