@@ -58,8 +58,8 @@ spec:
   weight: 1
   limits:
     resources:
-      #cpu: '40k'
-      cpu: '0'
+      cpu: '40k'
+      #cpu: '0'
   labels:
     billing-team: default
     team: platform
