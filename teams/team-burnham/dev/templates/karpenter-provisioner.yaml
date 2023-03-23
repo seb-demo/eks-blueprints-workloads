@@ -26,19 +26,19 @@ spec:
       #values: ['on-demand', 'spot']
       values: ['on-demand']
     - key: kubernetes.io/os		
-	      operator: In		
-	      values:		
-	        - linux		
-	    - key: karpenter.k8s.aws/instance-category		
-	      operator: In		
-	      values:		
-	        - c		
-	        - m		
-	        - r		
-	    - key: karpenter.k8s.aws/instance-generation		
-	      operator: Gt		
-	      values:		
-	        - '2'      
+      operator: In		
+      values:		
+      - linux		
+    - key: karpenter.k8s.aws/instance-category		
+      operator: In		
+      values:		
+      - c		
+      - m		
+      - r		
+    - key: karpenter.k8s.aws/instance-generation		
+      operator: Gt		
+      values:		
+      - '2'      
   providerRef:
     name: karpenter-default
   ttlSecondsUntilExpired: 2592000 # 30 Days = 60 * 60 * 24 * 30 Seconds;
