@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ostoy-microservice
+  name: ostoy
   namespace: team-riker  
   labels:
     app: ostoy
 spec:
   selector:
     matchLabels:
-      app: ostoy-microservice
+      app: ostoy
   replicas: 1
   template:
     metadata:
       labels:
-        app: ostoy-microservice
+        app: ostoy
     spec:
       containers:
-      - name: ostoy-microservice
+      - name: ostoy
         securityContext:
           allowPrivilegeEscalation: false
           runAsNonRoot: true
@@ -52,14 +52,14 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: ostoy-microservice                     
+              app: ostoy                     
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: ostoy-microservice-svc
+  name: ostoy-service
   labels:
-    app: ostoy-microservice
+    app: ostoy
 spec:
   type: ClusterIP
   ports:
@@ -67,7 +67,7 @@ spec:
       targetPort: 8080
       protocol: TCP
   selector:
-    app: ostoy-microservice
+    app: ostoy
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -87,7 +87,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ostoy-microservice
+                name: ostoy-service
                 port:
                   number: 8080
 ---
@@ -112,6 +112,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ostoy-microservice
+                name: ostoy-service
                 port:
                   number: 8080
