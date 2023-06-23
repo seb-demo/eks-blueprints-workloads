@@ -17,7 +17,7 @@ spec:
         - name: inspectorgadget
           securityContext:
             allowPrivilegeEscalation: false
-            runAsNonRoot: true
+            runAsNonRoot: false
             seccompProfile:
               type: RuntimeDefault
             capabilities:
