@@ -5,7 +5,7 @@ metadata:
     deployment.kubernetes.io/revision: "1"
 metadata:
     name: eksutils-deployment
-    namespace: default
+    namespace: team-riker
     labels: 
       app: toolbox
 spec:
@@ -54,7 +54,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: k8s-101-role
-  namespace: default
+  namespace: team-riker
 roleRef:
   kind: ClusterRole
   name: cluster-admin
@@ -64,4 +64,4 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: k8s-101-role
-  namespace: default
+  namespace: team-riker
