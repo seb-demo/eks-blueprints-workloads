@@ -136,7 +136,7 @@ spec:
   taints:
     - key: karpenter-old-prov
       value: 'true'
-      effect: NoSchedule  
+      effect: NoExecute  
 
   # Karpenter provides the ability to specify a few additional Kubelet args.
   # These are all optional and provide support for additional customization and use cases.
