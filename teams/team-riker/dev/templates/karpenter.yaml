@@ -133,7 +133,7 @@ spec:
   #     value: 'true'
   #     effect: NoSchedule
   # kubectl taint nodes -l karpenter.sh/provisioner-name=default  karpenter-old-prov=true:NoExecute
-  # k get nodes  -L karpenter.sh/provisioner-name=default
+  # k get nodes  -l karpenter.sh/provisioner-name=default
 
   # Karpenter provides the ability to specify a few additional Kubelet args.
   # These are all optional and provide support for additional customization and use cases.

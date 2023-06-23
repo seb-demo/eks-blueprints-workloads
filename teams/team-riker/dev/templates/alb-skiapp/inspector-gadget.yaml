@@ -113,3 +113,14 @@ spec:
                 name: inspectorgadget-service
                 port:
                   number: 80
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: inspectorgadget
+  namespace: team-riker
+spec:
+  selector:
+    matchLabels:
+      app: inspectorgadget
+  maxUnavailable: 1

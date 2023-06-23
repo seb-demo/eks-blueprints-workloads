@@ -115,3 +115,14 @@ spec:
                 name: ostoy-service
                 port:
                   number: 8080
+---                  
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: ostoy
+  namespace: team-riker
+spec:
+  selector:
+    matchLabels:
+      app: ostoy
+  maxUnavailable: 1
