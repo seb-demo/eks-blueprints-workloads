@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: inspectorgadget
-          image: sharepointoscar/inspectorgadget:v1
+          image: jelledruyts/inspectorgadget:latest
           env:
             - name: CLUSTER_NAME
               value: {{.Values.spec.clusterName}}
