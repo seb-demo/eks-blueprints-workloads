@@ -81,7 +81,7 @@ spec:
       cpu: '1'
       memory: 5Gi
       ephemeral-storage: 2Gi
-
+---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
 metadata:
@@ -121,7 +121,7 @@ spec:
   weight: 1
   limits:
     resources:
-      cpu: '0k'
+      cpu: '0'
   labels:
     billing-team: default
     team: default
