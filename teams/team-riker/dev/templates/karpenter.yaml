@@ -67,10 +67,10 @@ spec:
     type: karpenter
     
   # Do we want to apply some taints on the nodes ?  
-  taints:
-    - key: karpenter-old-prov
-      value: 'true'
-      effect: NoSchedule
+  # taints:
+  #   - key: karpenter-old-prov
+  #     value: 'true'
+  #     effect: NoSchedule
 
   # Karpenter provides the ability to specify a few additional Kubelet args.
   # These are all optional and provide support for additional customization and use cases.
@@ -121,7 +121,7 @@ spec:
   weight: 1
   limits:
     resources:
-      cpu: '2k'
+      cpu: '0k'
   labels:
     billing-team: default
     team: default
