@@ -81,7 +81,6 @@ spec:
       cpu: '1'
       memory: 5Gi
       ephemeral-storage: 2Gi
-{{ end }}
 
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
