@@ -15,14 +15,14 @@ spec:
     spec:
       containers:
         - name: inspectorgadget
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsNonRoot: false
-            seccompProfile:
-              type: RuntimeDefault
-            capabilities:
-              drop:
-              - ALL        
+          # securityContext:
+          #   allowPrivilegeEscalation: false
+          #   runAsNonRoot: false
+          #   seccompProfile:
+          #     type: RuntimeDefault
+          #   capabilities:
+          #     drop:
+          #     - ALL        
           image: jelledruyts/inspectorgadget:latest
           env:
             - name: CLUSTER_NAME
