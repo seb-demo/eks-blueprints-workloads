@@ -15,7 +15,7 @@ spec:
   ingressClassName: alb
   rules:
     {{ if .Values.spec.ingress.host }}
-    - host: {{ .Values.spec.ingress.host }}
+    - host: skiapp.{{ .Values.spec.ingress.host }}
     {{ else }}
     - host:  
     {{ end }} 
