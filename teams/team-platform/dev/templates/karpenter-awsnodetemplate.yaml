@@ -49,8 +49,8 @@ spec:
     karpenter.sh/cluster_name: {{.Values.spec.clusterName}}
     karpenter.sh/provisioner: default
   metadataOptions:
-    httpEndpoint: enabled
+    httpEndpoint: disabled
     httpProtocolIPv6: disabled
-    httpPutResponseHopLimit: 2 # 1 For harden securituy on ImDSv2; if 1 it breaks cloudWatch Metrics who cannot get instance ID
+    httpPutResponseHopLimit: 2 # https://aws.github.io/aws-eks-best-practices/security/docs/iam/#when-your-application-needs-access-to-imds-use-imdsv2-and-increase-the-hop-limit-on-ec2-instances-to-2
     httpTokens: required
 {{ end }}
