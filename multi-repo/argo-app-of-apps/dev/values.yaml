@@ -1,3 +1,8 @@
+destinationServer: ''
+argoProjectNamespace: ''
+argoNamespace: ''
+
+
 labels:
   env: dev
 spec:
@@ -6,36 +11,45 @@ spec:
   # All helm parameters can be sent by IaC code (Terraform or CDK)
   apps:
     ecsdemoFrontend:
+      createProject: true
       #repoURL: git@github.com:aws-containers/ecsdemo-frontend.git
-      repoURL: https://github.com/allamand/ecsdemo-frontend.git
+      repoURL: https://github.com/aws-containers/ecsdemo-frontend.git
       targetRevision: main
       path: kubernetes/helm/ecsdemo-frontend
-      ingress:
-        enabled: true
-        annotations:
-          alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-          alb.ingress.kubernetes.io/scheme: internet-facing
-          alb.ingress.kubernetes.io/tags: Environment=dev,Team=ecsdemo-frontend
-          alb.ingress.kubernetes.io/target-type: ip
-        className: alb
-        hosts:
-          - paths:
-              - path: /
-                pathType: Prefix
+      helm:
+        values: |-
+          ingress:
+            enabled: true
+            annotations:
+              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/tags: Environment=dev,Team=ecsdemo-frontend
+              alb.ingress.kubernetes.io/target-type: ip
+            className: alb
+            hosts:
+              - paths:
+                  - path: /
+                    pathType: Prefix
     ecsdemoNodejs:
-      repoURL: https://github.com/allamand/ecsdemo-nodejs.git
+      createProject: true
+      repoURL: https://github.com/aws-containers/ecsdemo-nodejs.git
       #repoURL: git@github.com:aws-containers/ecsdemo-nodejs.git
       targetRevision: main
       path: kubernetes/helm/ecsdemo-nodejs
-      image:
-        repository: 'public.ecr.aws/seb-demo/ecsdemo-nodejs'
-        tag: 'latest'
-
+      helm:
+        parameters:
+        - name: replicaCount
+          value: '3'
     ecsdemoCrystal:
-      repoURL: https://github.com/allamand/ecsdemo-crystal.git
+      createProject: true
+      repoURL: https://github.com/aws-containers/ecsdemo-crystal.git
       #repoURL: git@github.com:aws-containers/ecsdemo-crystal.git
       targetRevision: main
       path: kubernetes/helm/ecsdemo-crystal
+      helm:
+        parameters:
+        - name: replicaCount
+          value: '3'
       image:
         repository: 'public.ecr.aws/seb-demo/ecsdemo-crystal'
         tag: 'latest'
