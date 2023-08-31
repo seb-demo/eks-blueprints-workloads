@@ -9,21 +9,21 @@ spec:
     # - list:
     #   elements:
     #     - environment: dev
-    - matrix:
-        generators:
-          - git:
-              repoURL: '{{metadata.annotations.workload_repo_url}}'
+    #- matrix:
+    #    generators:
+    #      - git:
+    #          repoURL: '{{metadata.annotations.workload_repo_url}}'
               #repoURL: https://github.com/seb-demo/eks-blueprints-workloads
-              revision: 'main'
-              directories:
-                - path: 'envs/dev/*'
-          - clusters:
-              selector:
-                matchExpressions:
-                  - key: akuity.io/argo-cd-cluster-name
-                    operator: NotIn
-                    values:
-                      - in-cluster
+    #          revision: 'main'
+    #          directories:
+    #            - path: 'envs/dev/*'
+      - clusters:
+          selector:
+            matchExpressions:
+              - key: akuity.io/argo-cd-cluster-name
+                operator: NotIn
+                values:
+                  - in-cluster
   template:
     metadata:
       name: 'workload-{{name}}'
