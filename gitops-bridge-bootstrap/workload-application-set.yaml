@@ -9,31 +9,31 @@ spec:
     # - list:
     #   elements:
     #     - environment: dev
-    #- matrix:
-    #    generators:
-    #      - git:
-    #          repoURL: '{{metadata.annotations.workload_repo_url}}'
+    - matrix:
+        generators:
+          - git:
+              repoURL: 'git@github.com:seb-tmp/eks-blueprints-workloads'
               #repoURL: https://github.com/seb-demo/eks-blueprints-workloads
-    #          revision: 'main'
-    #          directories:
-    #            - path: 'envs/dev/*'
-      - clusters:
-          selector:
-            matchExpressions:
-              - key: akuity.io/argo-cd-cluster-name
-                operator: NotIn
-                values:
-                  - in-cluster
+              revision: 'main'
+              directories:
+                - path: 'envs/dev/*'
+          - clusters:
+              selector:
+                matchExpressions:
+                  - key: akuity.io/argo-cd-cluster-name
+                    operator: NotIn
+                    values:
+                      - in-cluster
   template:
     metadata:
       name: 'workload-{{name}}'
     spec:
       project: default
       sources:
-        - repoURL: '{{metadata.annotations.workload_repo_url}}'
-          targetRevision: '{{metadata.annotations.workload_repo_revision}}'
+        - repoURL: '{{metadata.annotations.gitops_workloads_url}}'
+          targetRevision: '{{metadata.annotations.gitops_workloads_revision}}'
           ref: values
-          path: '{{metadata.annotations.workload_repo_path}}'
+          path: '{{metadata.annotations.gitops_workloads_path}}'
           helm:
             releaseName: 'workload-{{name}}'
             ignoreMissingValueFiles: true
@@ -47,19 +47,21 @@ spec:
               "labels":
                 "env": "{{metadata.annotations.env}}"
               "region": "{{metadata.annotations.aws_region}}"
-              "repoUrl": "{{metadata.annotations.workload_repo_url}}"
+              "repoUrl": "{{metadata.annotations.gitops_workloads_url}}"
               "spec":
                 "source":
-                  "repoURL": "{{metadata.annotations.workload_repo_url}}"
-                  "targetRevision": "{{metadata.annotations.workload_repo_revision}}"
+                  "repoURL": "{{metadata.annotations.gitops_workloads_url}}"
+                  "targetRevision": "{{metadata.annotations.gitops_workloads_revision}}"
                 "blueprint": "terraform"
                 "clusterName": "{{metadata.annotations.cluster_name}}"
                 "env": "{{metadata.annotations.env}}"
                 "ingress":
                   "argocd_route53_weight": "{{metadata.annotations.argocd_route53_weight}}"
-                  #"host": "{{metadata.annotations.cluster_name}}.sallaman.people.aws.dev"
+                  "host": "{{metadata.annotations.eks_cluster_domain}}"
                   "route53_weight": "{{metadata.annotations.route53_weight}}"
-                  "type": "alb"
+                  "argocd_route53_weight": "{{metadata.annotations.argocd_route53_weight}}"
+                  "ecsfrontend_route53_weight": "{{metadata.annotations.ecsfrontend_route53_weight}}"
+                  "type": "{{metadata.annotations.ingress_type}}"
                 "karpenterInstanceProfile": "{{metadata.annotations.karpenter_node_instance_profile_name}}"
                 "target_group_arn": "{{metadata.annotations.target_group_arn}}"
       destination:
